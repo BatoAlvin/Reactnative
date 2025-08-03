@@ -13,17 +13,20 @@ import { TransactionItem } from "../../components/TransactionItem";
 import { NoTransactionFound } from "../../components/NoTransactionFound";
 
 
+
 export default function Page() {
-  const { user } = useUser();
+  // const { user } = useUser();
   const router = useRouter();
   const { transactions, summary, isLoading, loadData, deleteTransaction} = useTransactions (
-    user.id
+    // user.id
   );
   
   useEffect(() => {
     loadData();
   }, [loadData]);
 
+  // console.log(user.id, "User from clerk") ;
+  console.log(transactions);
   const handleDelete = (id) => {
     Alert.alert("Delete Transaction", "Are you sure you want to delete this transaction?", [
       { text: "Cancel", style: "cancel"},
@@ -77,7 +80,7 @@ export default function Page() {
         renderItem={({ item }) => 
           <TransactionItem item={item} onDelete={handleDelete} />
         }
-        // ListEmptyComponent={<NoTransactionFound />}
+        ListEmptyComponent={<NoTransactionFound />}
       />
     </View>
   );

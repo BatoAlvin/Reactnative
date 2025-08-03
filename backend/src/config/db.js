@@ -5,8 +5,6 @@ import "dotenv/config"
 export const sql = neon(process.env.DATABASE_URL)
 console.log("passed")
 
-
-
 export async function initDB() {
   try {
     await sql`
@@ -21,7 +19,7 @@ export async function initDB() {
     `
     console.log("Database created")
   } catch (error) {
-    console.log(error)
+    console.log("DB connection failed",error)
     process.exit(1);
   }
 }

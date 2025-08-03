@@ -8,6 +8,7 @@ export async function getTransactionsByUserId(req, res) {
     const transactions = await sql `
     SELECT * FROM transactions WHERE user_id = ${userId} ORDER BY created_at DESC
     `;
+    console.log("REcord fetched");
   } catch (e) {
 console.log("Error getting transactions", e);
 return res.status('500').json({ message: "Internal server error"});
@@ -72,7 +73,9 @@ export async function summaryTransaction(req, res) {
     const expensesResult = await sql `
     SELECT COALESCE(SUM(amount), 0) as expenses FROM transactions WHERE user_id = ${userId} AND expenses < 0
     `
-
+    console.log(balance, "Balance");
+    console.log(income, "Income");
+    console.log(expenses, "EXpense");
     res.status(200).json({
       balance: balanceResult[0].balance,
       income: incomeResult[0].income,
